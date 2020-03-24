@@ -10,6 +10,9 @@
           </li>
         </ul>
       </div>
+      <span class="btn-floating btn large halfway-fab grey">
+        <router-link :to="{name:'Edit-todo',params:{urlparam:to.urlparam}}" ><i class="material-icons">edit</i></router-link>
+      </span>
     </div>
   </div>
 </template>
@@ -40,7 +43,6 @@ export default {
   },
 created(){
   //fetch data from firestore
-console.log(this.todos)
     db.collection("To-Do-List").get().then(querySnapshot => {
     querySnapshot.forEach(doc => {
         // doc.data() is never undefined for query doc snapshots

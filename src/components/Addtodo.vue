@@ -6,9 +6,10 @@
               <label for="title" class="black-text">Title For Your Todo</label>
               <input type="text" name="title" v-model="title" placeholder="Title">   <!-- adding model for storing -->
             </div>
-            <div v-for="(to,index) in specs" :key="index">
+            <div v-for="(to,index) in specs" :key="index" class="field">
                 <label for="specifications"> Specifications:</label>
                 <input type="text" name="specifications" v-model="specs[index]">
+                <i class="material-icons delete" @click="deletespec(to)">delete</i>
             </div>
             <div class="field add-specs">
                 <label for="add-specifications" class="black-text">Add specifications:</label>
@@ -38,6 +39,7 @@ export default {
     methods:{
         Addtodo(){
 if(this.title){
+    
   this.feedback = null;
   this.urlparam = slugify(this.title),{
       replacement : '-',
@@ -52,6 +54,7 @@ if(this.title){
   }).then(()=>
   this.$router.push({name:'Index'})
   ).catch(err => console.log(err));
+    
 }   
 else{
     this.feedback = 'You must enter a title for your todo';
@@ -65,14 +68,17 @@ else{
             else{
               this.feedback = 'You must enter something in specs'
             }
+        },
+        deletespec(specs){
+            this.specs = this.specs.filter(spec =>{
+                return spec != specs
+            })
         }
     }
 }
 </script>
 <style scoped>
 .add-todo{
-    margin:60px;
-    padding:20px;
     max-width :500 px;
 
 }
@@ -82,5 +88,14 @@ else{
 }
 .add-todo .field{
     margin: 20px auto;
+    position: relative;
+}
+.add-todo .delete{
+position:absolute;
+right:0;
+bottom: 16px;
+color: grey;
+font-size:1.4em;
+cursor:pointer;
 }
 </style>
