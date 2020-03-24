@@ -10,7 +10,6 @@
           </li>
         </ul>
       </div>
-
     </div>
   </div>
 </template>
@@ -41,15 +40,14 @@ export default {
   },
 created(){
   //fetch data from firestore
-
+console.log(this.todos)
     db.collection("To-Do-List").get().then(querySnapshot => {
     querySnapshot.forEach(doc => {
         // doc.data() is never undefined for query doc snapshots
-        console.log(this.todos);
         let todo = doc.data();
         todo.id = doc.id;
         this.todos.push(todo);
-
+        
     });
 });
 }

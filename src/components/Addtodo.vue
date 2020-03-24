@@ -44,12 +44,14 @@ if(this.title){
       remove:/[!@#$%^&*()]/g,
       lower : true
   }
-  console.log(this.urlparam);
-  db.collection('smoothies').add({
+  db.collection('To-Do-List').add({
       title: this.title,
-      specifications: this.specs,
-      urlparam: this.urlparam
-  }).then().catch(err => console.log(err))
+      urlparam: this.urlparam,
+    specifications: this.specs,
+
+  }).then(()=>
+  this.$router.push({name:'Index'})
+  ).catch(err => console.log(err));
 }   
 else{
     this.feedback = 'You must enter a title for your todo';
