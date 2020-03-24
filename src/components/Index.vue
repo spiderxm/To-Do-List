@@ -1,5 +1,17 @@
 <template>
-  
+  <div class="index container">
+    <div class="card" v-for="to in todo" :key="to.id">
+      <div class="card-content">
+        <h2 class="black-text">{{to.title}}</h2>
+        <ul class="ingredients">
+          <li v-for = "(spec,index) in to.specifications" :key="index">
+          <span class="chip">{{spec}}</span>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
 </template>
 
 <script>
@@ -7,26 +19,39 @@ export default {
   name: 'HelloWorld',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
-    }
+todo:[{
+  title:'Morning Code',
+  requirements:'Codeforces',
+  specifications:['Windows laptop','ide','net connection'],
+  id:1
+},
+{
+  title:'Evening Code',
+  requirements:'Codechef',
+  specifications:['Macintosh','ide','net connection'],
+  id:2
+}]    }
   }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h1, h2 {
-  font-weight: normal;
+.index{
+  display:grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap:30px;
+  margin-top:30px;
 }
-ul {
-  list-style-type: none;
-  padding: 0;
+.index h2{
+  font-size: 1.8em;
+  text-align: center;
+  margin-top: 0;
 }
-li {
-  display: inline-block;
-  margin: 0 10px;
+.index .ingredients{
+  margin:30px auto;
 }
-a {
-  color: #42b983;
+.index .ingredients li{
+  display: inline-block ;
 }
 </style>
