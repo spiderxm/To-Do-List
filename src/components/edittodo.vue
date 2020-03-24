@@ -25,6 +25,7 @@
 </template>
 <script>
 import db from '@/firebase/init'
+import slugify from 'slugify'
 export default {
     name:'Edit-todo',
     data(){
@@ -36,16 +37,47 @@ export default {
         }
     },
     methods:{
+        edittodo(){
+           if(this.todo.title){
+               this.feedback = null;
+               this.todo.urlparam =slugify(this.todo.title,{
+                   replacement : '-',
+      remove:/[!@#$%^&*()]/g,
+      lower : true
+               })
+               db.collection('To-Do-List').doc(this.todo.id).update({
+    title: this.todo.title,
+      urlparam: this.todo.urlparam,
+    specifications: this.todo.specifications,
 
-    },
-    created(){
-        let ref = db.collection('To-Do-List').where('urlparam','==',this.$route.params.urlparam)   //Take 3 params
-        ref.get().then((snapshot)=>{
+               }).then(
+                   this.$router.push({name:'Index'})
+               ).catch(err => console.log(err));
+           }
+        },
+        addspec(){
+            if(this.another){
+             this.todo.specifications.push(this.another);
+             this.another = null,
+             this.feedback = null
+            }
+            else{
+              this.feedback = 'You must enter something in specs'
+            }
+        },
+        deletespec(specs){
+            this.todo.specifications = this.todo.specifications.filter(spec =>{
+                return spec != specs
+            })
+         }
+        },
+        created(){
+         let ref = db.collection('To-Do-List').where('urlparam','==',this.$route.params.urlparam)   //Take 3 params
+         ref.get().then((snapshot)=>{
           
           snapshot.forEach(doc => {
               this.todo = doc.data();
               this.todo.id = doc.id
-              console.log(1);
         })
     }
         )}

@@ -6,7 +6,7 @@
         <h2 class="black-text">{{to.title}}</h2>
         <ul class="ingredients">
           <li v-for = "(spec,index) in to.specifications" :key="index">
-          <span class="chip">{{spec}}</span>
+          <span class="chip center-text">{{spec}}</span>
           </li>
         </ul>
       </div>
