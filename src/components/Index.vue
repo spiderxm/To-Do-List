@@ -27,10 +27,16 @@ export default {
 },
   methods:{
     deltodo(id){
-      // this.todos= this.todos.filter(to => {
-      //   return to.id != id      //not permanently delelting it beacause on refreshing it will recreate every component
-      // })
-      console.log(id)
+
+          this.todos = this.todos.filter(to =>{
+              return to.id != id})
+        db.collection('To-Do-List').doc(id).delete()
+        .then (()=> {
+            this.todos = this.todos.filter(to =>{
+              return to.id != id
+            })
+        })
+        .catch(err => console.log(err))
     }
   },
 created(){

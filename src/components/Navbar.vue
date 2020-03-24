@@ -2,11 +2,12 @@
     <div class="navbar">
       <nav class="nav-extended black darken-2">
          <div class="nav-content">
-             <router-link to="">
-                 <span class="nav-title">To Do List</span></router-link>
+             <router-link :to="{name:'Index'}">
+                 <span class="nav-title">To Do List</span>
+             </router-link>
              <a href="" class="btn-floating btn-large halfway-fab grey">
-                <router-link to="">
-                    <i class="material-icons">+</i>
+                <router-link :to="{name:'Addtodo'}">
+                    <i class="material-icons" >+</i>
                 </router-link>
              </a>
          </div>
@@ -17,6 +18,9 @@
 export default {
     name:'Navbar',
     data(){
+
+    },
+    methods:{
 
     }
 }
