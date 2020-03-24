@@ -2,6 +2,7 @@
   <div class="index container">
     <div class="card" v-for="to in todo" :key="to.id">
       <div class="card-content">
+        <i class="material-icons delete" @click="deltodo(to.id)">delete</i>
         <h2 class="black-text">{{to.title}}</h2>
         <ul class="ingredients">
           <li v-for = "(spec,index) in to.specifications" :key="index">
@@ -17,6 +18,13 @@
 <script>
 export default {
   name: 'HelloWorld',
+  methods:{
+    deltodo(id){
+      this.todo = this.todo.filter(to => {
+        return to.id != id
+      })
+    }
+  },
   data () {
     return {
 todo:[{
@@ -53,5 +61,13 @@ todo:[{
 }
 .index .ingredients li{
   display: inline-block ;
+}
+.index .delete{
+  position: absolute;
+  top:4px;
+  right: 4px;
+  cursor: pointer;
+  color:gray;
+  font-size: 1.4em;
 }
 </style>
