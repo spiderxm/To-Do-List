@@ -6,7 +6,7 @@
                  <span class="nav-title">To Do List</span></router-link>
              <a href="" class="btn-floating btn-large halfway-fab grey">
                 <router-link to="">
-                    <i class="material-icons">add</i>
+                    <i class="material-icons">+</i>
                 </router-link>
              </a>
          </div>

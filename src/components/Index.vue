@@ -1,6 +1,6 @@
 <template>
   <div class="index container">
-    <div class="card" v-for="to in todo" :key="to.id">
+    <div class="card" v-for="to in todos" :key="to.id">
       <div class="card-content">
         <i class="material-icons delete" @click="deltodo(to.id)">delete</i>
         <h2 class="black-text">{{to.title}}</h2>
@@ -16,30 +16,37 @@
 </template>
 
 <script>
+import db from '@/firebase/init'
 export default {
   name: 'HelloWorld',
+    data () {
+    return {
+       todos:[]    
+    }
+  
+},
   methods:{
     deltodo(id){
-      this.todo = this.todo.filter(to => {
-        return to.id != id
-      })
+      // this.todos= this.todos.filter(to => {
+      //   return to.id != id      //not permanently delelting it beacause on refreshing it will recreate every component
+      // })
+      console.log(id)
     }
   },
-  data () {
-    return {
-todo:[{
-  title:'Morning Code',
-  requirements:'Codeforces',
-  specifications:['Windows laptop','ide','net connection'],
-  id:1
-},
-{
-  title:'Evening Code',
-  requirements:'Codechef',
-  specifications:['Macintosh','ide','net connection'],
-  id:2
-}]    }
-  }
+created(){
+  //fetch data from firestore
+
+    db.collection("To-Do-List").get().then(querySnapshot => {
+    querySnapshot.forEach(doc => {
+        // doc.data() is never undefined for query doc snapshots
+        console.log(this.todos);
+        let todo = doc.data();
+        todo.id = doc.id;
+        this.todos.push(todo);
+
+    });
+});
+}
 }
 </script>
 
