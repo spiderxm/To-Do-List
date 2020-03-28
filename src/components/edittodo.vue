@@ -1,4 +1,5 @@
 <template>
+
     <div v-if="todo" class="edit-todo container">
         <h2>Edit your todo</h2>
         <form @submit.prevent="edittodo">
@@ -24,6 +25,7 @@
  
 </template>
 <script>
+import Navbar from '@/components/Navbar'
 import db from '@/firebase/init'
 import slugify from 'slugify'
 export default {
@@ -36,6 +38,9 @@ export default {
 
         }
     },
+    components:{
+    Navbar
+  },
     methods:{
         edittodo(){
            if(this.todo.title){

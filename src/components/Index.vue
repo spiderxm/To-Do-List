@@ -18,6 +18,8 @@
 </template>
 
 <script>
+import Navbar from '@/components/Navbar'
+
 import db from '@/firebase/init'
 export default {
   name: 'HelloWorld',
@@ -27,6 +29,9 @@ export default {
     }
   
 },
+components:{
+    Navbar
+  },
   methods:{
     deltodo(id){
 

@@ -24,7 +24,8 @@
 </template>
 <script>
 import db from '@/firebase/init';
-import slugify from 'slugify'
+import Navbar from '@/components/Navbar';
+import slugify from 'slugify';
 export default {
     name:'Addtodo',
     data(){
@@ -35,6 +36,9 @@ export default {
           feedback:null,
           urlparam: null,
         }
+    },
+    components:{
+        Navbar
     },
     methods:{
         Addtodo(){
