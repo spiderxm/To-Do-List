@@ -19,7 +19,7 @@
 
 <script>
 import Navbar from '@/components/Navbar'
-
+import firebase from 'firebase'
 import db from '@/firebase/init'
 export default {
   name: 'HelloWorld',
@@ -29,6 +29,7 @@ export default {
     }
   
 },
+              
 components:{
     Navbar
   },
@@ -48,7 +49,7 @@ components:{
   },
 created(){
   //fetch data from firestore
-    db.collection("To-Do-List").get().then(querySnapshot => {
+    db.collection("To-Do-List").where('user_id','==',firebase.auth().currentUser.uid).get().then(querySnapshot => {
     querySnapshot.forEach(doc => {
         // doc.data() is never undefined for query doc snapshots
         let todo = doc.data();

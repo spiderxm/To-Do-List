@@ -25,6 +25,7 @@
 <script>
 import db from '@/firebase/init';
 import Navbar from '@/components/Navbar';
+import firebase from 'firebase';
 import slugify from 'slugify';
 export default {
     name:'Addtodo',
@@ -35,7 +36,12 @@ export default {
           specs:[],
           feedback:null,
           urlparam: null,
+          id:null
         }
+    },
+    mounted(){
+               let user = firebase.auth().currentUser
+               this.id = user.uid;
     },
     components:{
         Navbar
@@ -51,6 +57,7 @@ if(this.title){
       lower : true
   }
   db.collection('To-Do-List').add({
+      user_id:this.id,
       title: this.title,
       urlparam: this.urlparam,
     specifications: this.specs,

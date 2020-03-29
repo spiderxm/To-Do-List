@@ -62,6 +62,10 @@ export default {
  .login .field{
      margin-bottom: 16px;
  }
+ .card-panel{
+     border-radius: 30px;
+ }
+
 
 
 

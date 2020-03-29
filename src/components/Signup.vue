@@ -61,7 +61,7 @@ export default {
                               alias: this.alias,
                               geolocation: null,
                               user_id:cred.user.uid
-                          }).then( () => this.$router.push({ 'name':'Index'})
+                          }).then( () => this.$router.push({ name:'Index'})
                           )
                         }).catch(err=>
                         {console.log(err)
@@ -90,4 +90,8 @@ export default {
 .signup .field{
     margin-bottom: 16px;
 }
+.card-panel{
+     border-radius: 30px;
+ }
+
 </style>

@@ -1,33 +1,45 @@
 <template>
-    <div class="navbar">
       
-       <nav class="nav-extended black darken-2">
-    <div class="nav-wrapper nav-content">
-      <a href="#" class="brand-logo">To Do List</a>
-      <ul class="right">
-                 <li><router-link :to="{'name':'login'}">Login</router-link>
+ 
+
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+      <div class="container">
+          <a href="index.html" class="navbar-brand">Explore Nit</a>
+          <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+              <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+              <ul class="navbar-nav ml-auto">
+                <li><router-link v-if="!user" :to="{'name':'login'}">Login</router-link>
                 </li> 
-                <li><router-link :to="{'name':'signup'}" >Register</router-link>
+                <li><router-link v-if="!user" :to="{'name':'signup'}" >Register</router-link>
                 </li>
-                <li><a @click="logout">Logout</a></li>
-             </ul>
-    </div>
-    <div class="nav-content">
+                <li v-if="user">
+                    <a>{{user.email}}</a>
+                  <li>
+                <li><a v-if="user" @click="logout">Logout</a></li>
+              </ul>
+          </div>
+            <div class="nav-content" v-if="user">
       <a href="" class="btn-floating btn-large halfway-fab grey">
-                <router-link :to="{name:'Addtodo'}">
+                <router-link  :to="{name:'Addtodo'}">
                     <i class="material-icons" >+</i>
                 </router-link>
              </a>
     </div>
+      </div>
   </nav>
-    </div>
+ 
+    
 </template>
 <script>
 import firebase from 'firebase'
 export default {
     name:'Navbar',
     data(){
-
+     return{
+         user:null
+     }
     },
     methods:{
 logout(){
@@ -35,17 +47,30 @@ logout(){
               this.$router.push({'name':'login'})
           }).catch(err => console.log(err))
         }
-    }
+    },
+    created(){
+      firebase.auth().onAuthStateChanged((user) => {
+         if(user){
+             this.user = user
+         }
+         else{ 
+              this.user = null
+         }
+      })
+
+}
 }
 </script>
 <style scoped>
-.navbar nav {
-    padding:0 40px;
+.navbar .nav-link{
+    font-size: 14px;
+    text-transform: uppercase;
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+
 }
-.navbar li{
-    margin-top: 4px;
+.navbar .nav-item.active{
+    border-right: #444 3px solid;
 }
-.navbar a{
-    margin-top: 12px;
-}
+
 </style>
