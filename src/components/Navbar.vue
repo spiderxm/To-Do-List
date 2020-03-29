@@ -2,31 +2,32 @@
       
  
 
-    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+    <nav class="navbar navbar-expand navbar-dark bg-dark">
       <div class="container">
-          <a href="index.html" class="navbar-brand">Explore Nit</a>
+          <a href="index.html" class="navbar-brand">To Do List</a>
           <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
               <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
               <ul class="navbar-nav ml-auto">
-                <li><router-link v-if="!user" :to="{'name':'login'}">Login</router-link>
+                <li><router-link v-if="!user" :to="{'name':'login'}" class="nav-item">Login</router-link>
                 </li> 
-                <li><router-link v-if="!user" :to="{'name':'signup'}" >Register</router-link>
+                <li><router-link v-if="!user" :to="{'name':'signup'}" class="nav-item">Register</router-link>
                 </li>
-                <li v-if="user">
+                <li v-if="user" class="nav-item">
                     <a>{{user.email}}</a>
                   <li>
-                <li><a v-if="user" @click="logout">Logout</a></li>
+                <li class="nav-item"><a v-if="user" @click="logout">Logout</a></li>
               </ul>
           </div>
             <div class="nav-content" v-if="user">
-      <a href="" class="btn-floating btn-large halfway-fab grey">
+            <a href="" class="btn-floating btn-large halfway-fab grey">
                 <router-link  :to="{name:'Addtodo'}">
                     <i class="material-icons" >+</i>
                 </router-link>
              </a>
     </div>
+           
       </div>
   </nav>
  
