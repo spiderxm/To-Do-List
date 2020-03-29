@@ -53,6 +53,7 @@ logout(){
       firebase.auth().onAuthStateChanged((user) => {
          if(user){
              this.user = user
+             console.log(this.user);
          }
          else{ 
               this.user = null
@@ -72,6 +73,9 @@ logout(){
 }
 .navbar .nav-item.active{
     border-right: #444 3px solid;
+}
+.navbar{
+    min-height: 90px;
 }
 
 </style>
